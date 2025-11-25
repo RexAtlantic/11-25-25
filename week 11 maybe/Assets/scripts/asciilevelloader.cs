@@ -15,8 +15,13 @@ public class asciilevelloader : MonoBehaviour
     //string to hold a filename int to hold a level
     public string filename;
 
-    private int currentLevel = 0;
+    public int currentLevel = 0;
 
+    //variable for player
+    private GameObject currentPlayer;
+
+    //variabel of player start position
+    private Vector2 startPos;
 
     //properly wrap currentlevel into a new loaded level
 
@@ -93,6 +98,13 @@ public class asciilevelloader : MonoBehaviour
                 case 'p' : 
                 //make player game object
                 newOBJ = Instantiate<GameObject>(player);
+                //check if it is the currentPlayer or not
+                if(currentPlayer == null)
+                    currentPlayer = newOBJ;
+
+
+                    //save pos w as the start pos
+                    startPos = new Vector3(x + xOffset, -y + yOffset, 0);
                 break;
 
                 //if the letter is w
@@ -136,10 +148,17 @@ public class asciilevelloader : MonoBehaviour
 
       }
 
-     
-
       }
 
     
+    public void ResetPlayer()
+    {
+        //return player to the starting position
+        currentPlayer.transform.position = startPos;
+    }
+
+
+
+
     
 }
